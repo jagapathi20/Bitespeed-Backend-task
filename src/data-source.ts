@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Contact } from "./entities/contact"; 
-import path from "path"; // Import path
+import path from "path";
 
 export const AppDataSource = new DataSource({
     type: "better-sqlite3",
@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
     logging: process.env.NODE_ENV === "development",
     entities: [Contact],
     migrations: [
-        // Using path.join with process.cwd() is the most reliable way on Render
+        // This logic ensures Node doesn't try to read .ts files in production
         process.env.NODE_ENV === "production" 
             ? path.join(process.cwd(), "dist", "migration", "*.js") 
             : path.join(process.cwd(), "src", "migration", "*.ts")
