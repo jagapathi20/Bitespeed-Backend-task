@@ -9,7 +9,15 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_NAME || "database.sqlite",
     synchronize: false,
     logging: process.env.NODE_ENV === "development",
-    entities: [__dirname + "/entities/*.ts"],
-    migrations: [__dirname + "/migration/*.ts"],
+    entities: [
+        process.env.NODE_ENV === "production" 
+            ? "dist/entities/*.js" 
+            : "src/entities/*.ts"
+    ],
+    migrations: [
+        process.env.NODE_ENV === "production" 
+            ? "dist/migration/*.js" 
+            : "src/migration/*.ts"
+    ],
     subscribers: [],
 });

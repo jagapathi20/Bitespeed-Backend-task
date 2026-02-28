@@ -20,10 +20,10 @@ app.get("/", (req, res) => {
     res.send("Welcome")
 })
 
-app.use("/api/identity", identityRouter)
+app.use("/api/identify", identityRouter)
 
-const port = process.env.PORT || 8000
+const PORT = Number(process.env.PORT) || 8000
 
-app.listen(port, () => {
-    console.log(`server is running on port ${port}`)
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`server is running on port ${PORT}`)
 })
