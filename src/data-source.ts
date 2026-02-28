@@ -10,10 +10,9 @@ export const AppDataSource = new DataSource({
     logging: process.env.NODE_ENV === "development",
     entities: [Contact],
     migrations: [
-        // This logic ensures Node doesn't try to read .ts files in production
-        process.env.NODE_ENV === "production" 
-            ? path.join(process.cwd(), "dist", "migration", "*.js") 
-            : path.join(process.cwd(), "src", "migration", "*.ts")
+    process.env.NODE_ENV === "production" 
+        ? path.join(__dirname, "migration", "*.js") 
+        : path.join(__dirname, "migration", "*.ts")
     ],
     subscribers: [],
 });
